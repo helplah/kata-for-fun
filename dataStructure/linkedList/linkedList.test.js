@@ -62,7 +62,7 @@ describe("LinkedList", () => {
       expect(list.getLast()).toBe(nodeA);
     });
 
-    it.only("pop should remove and return last item", () => {
+    it("pop should remove and return last item", () => {
       let node, nodeA, nodeB;
       expect(list.pop()).toBe(null);
       node = new Node("apple");

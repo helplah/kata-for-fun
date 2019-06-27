@@ -33,48 +33,50 @@ class LinkedList {
   }
 
   shift() {
-    if (this.head === null) {
-      return this.head;
-    } else {
-      const currentNode = this.head;
+    const currentNode = this.head;
+
+    if (currentNode !== null) {
       if (currentNode.next === undefined) {
         currentNode.next = null;
       }
 
       this.head = currentNode.next;
-      return currentNode;
     }
+
+    return currentNode;
   }
 
   getLast() {
-    if (this.head === null) {
-      return this.head;
-    } else {
-      let currentNode = this.head;
+    let currentNode = this.head;
 
+    if (currentNode !== null) {
       while (currentNode.next !== undefined) {
-        currentNode = this.head.next;
+        // previously currentNode = this.head.next
+        currentNode = currentNode.next;
       }
-
-      return currentNode;
     }
+
+    return currentNode;
   }
 
   pop() {
-    if (this.head === null) {
-      return this.head;
+    let currentNode = this.head;
+
+    if (currentNode === null) {
+      return currentNode;
     } else {
-      const lastItem = this.getLast();
-      let currentNode = this.head;
       console.log("before loop", currentNode);
 
-      while (currentNode !== undefined && currentNode.next !== lastItem) {
-        currentNode = this.head.next;
+      while (currentNode.next !== undefined) {
+        currentNode = currentNode.next;
       }
+
       console.log("after loop", currentNode);
 
-      // currentNode.next = null;
-      // return lastItem;
+      const lastNode = currentNode;
+      currentNode.next = null;
+      currentNode = null;
+      return lastNode;
     }
   }
 
