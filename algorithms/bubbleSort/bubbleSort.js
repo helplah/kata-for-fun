@@ -1,3 +1,4 @@
+// double for loop
 /* module.exports.bubbleSort = arr => {
   for (let x = 0; x < arr.length; x++) {
     for (let y = arr.length - 1; y > 0; y--) {
@@ -12,7 +13,9 @@
   return arr;
 }; */
 
-// still doing
+/* Then, using a do-while loop, 
+  it will only run the code if the swapped variable is true, 
+  thus ensuring that only 1 extra verification iteration happens. */
 module.exports.bubbleSort = arr => {
   let swapped;
   do {
@@ -25,7 +28,7 @@ module.exports.bubbleSort = arr => {
         swapped = true;
       }
     }
-  } while (!swapped);
+  } while (swapped);
 
   return arr;
 };
