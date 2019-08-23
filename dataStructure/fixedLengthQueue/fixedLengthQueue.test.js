@@ -48,7 +48,7 @@ describe("FixedLengthQueue", () => {
     expect(fixedQueue.peek()).toEqual("banana");
   });
 
-  it.only("can peek correctly after dequeue", () => {
+  it("can peek correctly after dequeue", () => {
     const fixedQueue = new FixedLengthQueue(3);
 
     expect(fixedQueue.dequeue()).toEqual(undefined);
