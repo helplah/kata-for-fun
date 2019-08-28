@@ -12,6 +12,7 @@ class Node {
 class LinkedList {
   constructor() {
     this.head = null;
+    this.size = 0;
   }
 
   getFirst() {
@@ -23,68 +24,88 @@ class LinkedList {
       throw new Error("not a node");
     }
 
-    if (this.head === null) {
-      this.head = item;
-    } else {
-      const nextItem = this.head;
-      this.head = item;
-      item.next = nextItem;
-    }
+    const nextItem = this.head;
+    this.head = item;
+    this.head.next = nextItem;
+    this.size++;
   }
 
   shift() {
-    const currentNode = this.head;
-
-    if (currentNode !== null) {
-      if (currentNode.next === undefined) {
-        currentNode.next = null;
-      }
-
-      this.head = currentNode.next;
+    const item = this.head;
+    if (this.head !== null) {
+      this.head = this.head.next;
+      this.size--;
     }
-
-    return currentNode;
+    return item;
   }
 
   getLast() {
-    let currentNode = this.head;
-
-    if (currentNode !== null) {
-      while (currentNode.next !== undefined) {
-        // previously currentNode = this.head.next
-        currentNode = currentNode.next;
-      }
+    let lastItem = this.head;
+    while (lastItem && lastItem !== null && lastItem.next != null) {
+      lastItem = lastItem.next;
     }
-
-    return currentNode;
+    return lastItem;
   }
 
   pop() {
-    let currentNode = this.head;
+    let lastItem = this.getLast();
 
-    if (currentNode === null) {
-      return currentNode;
-    } else {
-      console.log("before loop", currentNode);
-
-      while (currentNode.next !== undefined) {
-        currentNode = currentNode.next;
-      }
-
-      console.log("after loop", currentNode);
-
-      const lastNode = currentNode;
-      currentNode.next = null;
-      currentNode = null;
-      return lastNode;
+    let item = this.head;
+    while (item !== null && item.next !== null && item.next !== lastItem) {
+      item = item.next;
     }
+
+    if (item !== null) {
+      this.size--;
+    }
+
+    if (item !== lastItem && this.head !== null) {
+      item.next = null;
+    } else if (item && item === lastItem) {
+      this.head = null;
+    }
+    return lastItem;
   }
 
-  push() {}
+  push(item) {
+    if (!(item instanceof Node)) {
+      throw new Error("not a node");
+    }
 
-  getSize() {}
+    if (this.head === null) {
+      this.head = item;
+    } else {
+      const lastItem = this.getLast();
+      console.log(lastItem);
+      lastItem.next = item;
+    }
+    this.size++;
+  }
 
-  getAt() {}
+  getSize() {
+    return this.size;
+  }
+
+  getAt(index) {
+    if (isNaN(index)) {
+      throw new Error("not a number");
+    } else if (index < 0) {
+      throw new Error("index out of bound");
+    }
+
+    let counter = index;
+    let item = this.head;
+    while (counter > 0) {
+      if (item.next) {
+        item = item.next;
+      } else {
+        throw new Error("index out of bound");
+      }
+      counter--;
+    }
+
+    return item;
+  }
 
   insertAt() {}
 
