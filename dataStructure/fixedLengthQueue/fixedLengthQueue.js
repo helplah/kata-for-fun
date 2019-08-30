@@ -7,7 +7,7 @@ module.exports = class FixedLengthQueue {
 
   enqueue(item) {
     if (this.enqueueCount === this.array.length) {
-      throw new Error("Array is full already!");
+      throw new Error("FixedLengthQueue is full already!");
     }
     this.array[this.enqueueCount] = item;
     this.enqueueCount++;
