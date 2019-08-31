@@ -9,4 +9,21 @@ module.exports.binarySearch = (array, itemId) => {
   //  else
   //    set low to middle + 1
   // return null
+
+  let low = 0;
+  let high = array.length - 1;
+
+  while (low <= high) {
+    const middle = Math.floor((low + high) / 2);
+    const item = array[middle];
+
+    if (item.id === itemId) {
+      return item;
+    } else if (item.id > itemId) {
+      high = middle - 1;
+    } else {
+      low = middle + 1;
+    }
+  }
+  return null;
 };
