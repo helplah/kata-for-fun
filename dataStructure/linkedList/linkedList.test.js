@@ -1,7 +1,7 @@
 const { Node, LinkedList } = require("./linkedList");
 
 describe("LinkedList", () => {
-  xdescribe("Node", () => {
+  describe("Node", () => {
     it("should throw an error when next is not a node", () => {
       expect(() => new Node("apple", "banana")).toThrow("not a node");
     });
@@ -52,13 +52,21 @@ describe("LinkedList", () => {
 
     it("getLast should get the last item", () => {
       expect(list.getLast()).toBe(null);
+
       const nodeA = new Node("apple");
-      expect(list.unshift(nodeA));
+      list.unshift(nodeA);
       expect(list.getLast()).toBe(nodeA);
+
+      const nodeB = new Node("banana");
+      list.unshift(nodeB);
       expect(list.getLast()).toBe(nodeA);
-      expect(list.unshift(new Node("banana")));
+
+      const nodeC = new Node("cucumber");
+      list.unshift(nodeC);
       expect(list.getLast()).toBe(nodeA);
-      list.shift();
+      expect(list.shift()).toBe(nodeC);
+      expect(list.getLast()).toBe(nodeA);
+      expect(list.shift()).toBe(nodeB);
       expect(list.getLast()).toBe(nodeA);
     });
 
@@ -123,10 +131,12 @@ describe("LinkedList", () => {
     it("getAt should return item at nth position", () => {
       expect(() => list.getAt("a")).toThrow("not a number");
       expect(list.getAt(0)).toEqual(null);
+      expect(() => list.getAt(-1)).toThrow("index out of bound");
+      expect(() => list.getAt(1)).toThrow("index out of bound");
+      expect(() => list.getAt(2)).toThrow("index out of bound");
       const nodeA = new Node("a");
       list.unshift(nodeA);
       expect(list.getAt(0)).toEqual(nodeA);
-      expect(() => list.getAt(1)).toThrow("index out of bound");
       const nodeB = new Node("b");
       const nodeC = new Node("c");
       list.unshift(nodeB);

@@ -41,7 +41,7 @@ class LinkedList {
 
   getLast() {
     let lastItem = this.head;
-    while (lastItem && lastItem !== null && lastItem.next != null) {
+    while (lastItem && lastItem.next != null) {
       lastItem = lastItem.next;
     }
     return lastItem;
@@ -49,20 +49,20 @@ class LinkedList {
 
   pop() {
     let lastItem = this.getLast();
-
     let item = this.head;
-    while (item !== null && item.next !== null && item.next !== lastItem) {
+
+    while (item && item.next != null && item.next !== lastItem) {
       item = item.next;
+    }
+
+    if (item && item === lastItem) {
+      this.head = null;
+    } else if (item && item !== lastItem) {
+      item.next = null;
     }
 
     if (item !== null) {
       this.size--;
-    }
-
-    if (item !== lastItem && this.head !== null) {
-      item.next = null;
-    } else if (item && item === lastItem) {
-      this.head = null;
     }
     return lastItem;
   }
@@ -121,7 +121,6 @@ class LinkedList {
       prevItem.next = item;
       item.next = nextItem;
     }
-
     this.size++;
   }
 
